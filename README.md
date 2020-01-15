@@ -1,2 +1,0 @@
-# wrrions-scripts
-My scripts
