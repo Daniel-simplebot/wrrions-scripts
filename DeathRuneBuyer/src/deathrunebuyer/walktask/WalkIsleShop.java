@@ -9,7 +9,7 @@ import simple.robot.utils.WorldArea;
 public class WalkIsleShop extends Task {
 
 	WorldArea isle = new WorldArea(new WorldPoint(2060, 3934, 0), new WorldPoint(2113, 3887, 0));
-	
+
 	public WalkIsleShop(ClientContext ctx) {
 		super(ctx);
 	}
@@ -18,15 +18,15 @@ public class WalkIsleShop extends Task {
 	public boolean condition() {
 		return ctx.pathing.inArea(isle);
 	}
-	
+
 	WorldPoint[] path = {
-		    new WorldPoint(2107, 3917, 0),
-		    new WorldPoint(2106, 3922, 0),
-		    new WorldPoint(2101, 3926, 0),
-		    new WorldPoint(2095, 3930, 0),
-		    new WorldPoint(2089, 3931, 0),
-		    new WorldPoint(2082, 3931, 0)
-		};
+			new WorldPoint(2107, 3917, 0),
+			new WorldPoint(2106, 3922, 0),
+			new WorldPoint(2101, 3926, 0),
+			new WorldPoint(2095, 3930, 0),
+			new WorldPoint(2089, 3931, 0),
+			new WorldPoint(2082, 3931, 0)
+	};
 
 	@Override
 	public void run() {

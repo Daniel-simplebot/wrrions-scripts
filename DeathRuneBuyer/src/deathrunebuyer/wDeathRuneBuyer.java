@@ -49,7 +49,7 @@ public class wDeathRuneBuyer extends TaskScript {
 		g.drawRect(5, 4, 190, 70);
 		g.setFont(font1);
 		g.setColor(color3);
-		g.drawString("Runtime: "+ formatTime(runTime), 12, 23);
+		g.drawString("Time running: "+ formatTime(runTime), 12, 23);
 		g.drawString("Bought: "+runesBought+" death runes", 12, 42);
 		g.drawString("|w|DeathRuneBuyer by Daniel", 12, 62);
 	}
@@ -73,9 +73,9 @@ public class wDeathRuneBuyer extends TaskScript {
 	public void onExecute() {
 		int min = 45000;
 		String value = JOptionPane.showInputDialog(null,
-                "45k is minimum",
-                "Enter amount of coins to use",
-                JOptionPane.INFORMATION_MESSAGE);
+				"45k is minimum",
+				"Enter amount of coins to use",
+				JOptionPane.INFORMATION_MESSAGE);
 		try {
 			int total= Integer.parseInt(value);
 			if (total < min) total = min;
@@ -89,6 +89,7 @@ public class wDeathRuneBuyer extends TaskScript {
 		buyIsle = true;
 		buyMageArea = false;
 		tasks.addAll(Arrays.asList(new BankTask(ctx, this), new WalkIsleShop(ctx), new BuyIsle(ctx, this), new BuyMageArea(ctx, this)));
+		startTime = System.currentTimeMillis();
 	}
 
 	@Override

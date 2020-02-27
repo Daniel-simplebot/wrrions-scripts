@@ -15,7 +15,7 @@ public class BankTask extends Task {
 	WorldArea home = new WorldArea(new WorldPoint(3051, 3522, 0), new WorldPoint(3132, 3439, 0));
 
 	private wDeathRuneBuyer main;
-	
+
 	public BankTask(ClientContext ctx, wDeathRuneBuyer main) {
 		super(ctx);
 		this.main = main;
@@ -28,9 +28,18 @@ public class BankTask extends Task {
 
 	@Override
 	public void run() {
+		//System.out.println("Isle: "+main.buyIsle + ", Mage arena: "+main.buyMageArea);
+		/**
+		 * Paint purposes
+		 */
 		int invCount = ctx.inventory.populate().filter("Death rune").population(true);
 		if(invCount > main.prevInvCount) main.runesBought += (invCount - main.prevInvCount);
 		main.prevInvCount = invCount;
+
+		if (!ctx.pathing.running() && ctx.pathing.energyLevel() >= 30 ) {
+			ctx.updateStatus("Turning run on");
+			ctx.pathing.running(true);
+		}
 		
 		int countGP = ctx.inventory.populate().filter("Coins").population(true);
 		SimpleObject bank = ctx.objects.populate().filter("Grand Exchange booth").filterHasAction("Bank").nearest().next();
@@ -58,14 +67,13 @@ public class BankTask extends Task {
 				if (portal != null && portal.visibleOnScreen() && !ctx.portalTeleports.zenytePortalOpen()) {
 					portal.click("Teleport");
 					ctx.onCondition(() -> ctx.portalTeleports.zenytePortalOpen(), 3000);
-					ctx.updateStatus("Finding portal");
 				}
 				if (portal != null && !portal.visibleOnScreen() && !ctx.portalTeleports.zenytePortalOpen()) {
 					ctx.pathing.step(new WorldPoint(3097, 3500, 0));
 					portal.turnTo();
 				}
 			} 
-			if (ctx.portalTeleports.zenytePortalOpen() && main.buyIsle == true) {
+			if (ctx.portalTeleports.zenytePortalOpen() && main.buyIsle == true && main.buyMageArea == false) {
 				ctx.sleep(1000);
 				ctx.updateStatus("Teleporting to lunar isle");
 				SimpleWidget misc = ctx.widgets.getWidget(700, 4);
@@ -85,7 +93,7 @@ public class BankTask extends Task {
 					}
 				}
 			}
-			if (ctx.portalTeleports.zenytePortalOpen() && main.buyMageArea == true) {
+			if (ctx.portalTeleports.zenytePortalOpen() && main.buyMageArea == true && main.buyIsle == false) {
 				ctx.sleep(1000);
 				ctx.updateStatus("Teleporting to mage arena");
 				SimpleWidget wilderness = ctx.widgets.getWidget(700, 4);
