@@ -24,7 +24,7 @@ discord = "Daniel#0157", name = "|w|DeathRuneBuyer", servers = { "Zenyte" }, ver
 public class wDeathRuneBuyer extends TaskScript {
 
 	public boolean buyIsle = false;
-	public boolean buyMageArea = false;
+	public boolean buyMageArena = false;
 
 	private long startTime = 0;
 	public int prevInvCount;
@@ -87,7 +87,7 @@ public class wDeathRuneBuyer extends TaskScript {
 		}
 		prevInvCount = ctx.inventory.populate().filter("Death rune").population(true);
 		buyIsle = true;
-		buyMageArea = false;
+		buyMageArena = false;
 		tasks.addAll(Arrays.asList(new BankTask(ctx, this), new WalkIsleShop(ctx), new BuyIsle(ctx, this), new BuyMageArea(ctx, this)));
 		startTime = System.currentTimeMillis();
 	}

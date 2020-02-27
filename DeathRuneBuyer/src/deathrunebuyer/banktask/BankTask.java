@@ -73,7 +73,7 @@ public class BankTask extends Task {
 					portal.turnTo();
 				}
 			} 
-			if (ctx.portalTeleports.zenytePortalOpen() && main.buyIsle == true && main.buyMageArea == false) {
+			if (ctx.portalTeleports.zenytePortalOpen() && main.buyIsle == true && main.buyMageArena == false) {
 				ctx.sleep(1000);
 				ctx.updateStatus("Teleporting to lunar isle");
 				SimpleWidget misc = ctx.widgets.getWidget(700, 4);
@@ -93,7 +93,7 @@ public class BankTask extends Task {
 					}
 				}
 			}
-			if (ctx.portalTeleports.zenytePortalOpen() && main.buyMageArea == true && main.buyIsle == false) {
+			if (ctx.portalTeleports.zenytePortalOpen() && main.buyMageArena == true && main.buyIsle == false) {
 				ctx.sleep(1000);
 				ctx.updateStatus("Teleporting to mage arena");
 				SimpleWidget wilderness = ctx.widgets.getWidget(700, 4);

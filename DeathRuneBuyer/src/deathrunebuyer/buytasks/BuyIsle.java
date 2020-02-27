@@ -22,7 +22,7 @@ public class BuyIsle extends Task {
 
 	@Override
 	public boolean condition() {
-		return ctx.pathing.inArea(shop) && main.buyMageArea == false && main.buyIsle == true;
+		return ctx.pathing.inArea(shop) && main.buyMageArena == false && main.buyIsle == true;
 	}
 
 	@Override
@@ -49,11 +49,14 @@ public class BuyIsle extends Task {
 				ctx.updateStatus("Teleporting home");
 				ctx.shop.closeShop();
 				ctx.magic.castSpellOnce("Zenyte Home Teleport");
-				main.buyMageArea = true;
+				main.buyMageArena = true;
 				main.buyIsle = false;
 				ctx.onCondition(() -> !ctx.pathing.inArea(shop), 2000);
 			}
 		}
+		/**
+		 * Prevents script from disrupting our teleport
+		 */
 		int teleAnims[] = { 4847, 4850, 4853, 4855, 4857 };
 		for (int i : teleAnims) {
 			if (ctx.players.getLocal().getAnimation() == i) {

@@ -30,6 +30,11 @@ public class WalkIsleShop extends Task {
 
 	@Override
 	public void run() {
+		if (!ctx.pathing.running() && ctx.pathing.energyLevel() >= 30 ) {
+			ctx.updateStatus("Turning run on");
+			ctx.pathing.running(true);
+		}
+		
 		SimpleNpc house = ctx.npcs.populate().filter("House").nearest().next();
 		if (house == null) {
 			ctx.pathing.walkPath(path);
